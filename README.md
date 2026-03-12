@@ -6,8 +6,8 @@
 
 This REANA reproducible analysis example demonstrates the computation of the
 invariant mass spectrum of two muon final states with CMS Open Data. It is based
-on the [original code](http://opendata.cern.ch/record/5001) from the [CERN Open
-Data portal](http://opendata.cern.ch/).
+on the [original code](http://opendata.cern.ch/record/5001) from the
+[CERN Open Data portal](http://opendata.cern.ch/).
 
 ## Analysis structure
 
@@ -98,31 +98,28 @@ workflow steps and expected outputs:
 version: 0.6.0
 inputs:
   files:
-      - BuildFile.xml
-      - demoanalyzer_cfg.py
+    - BuildFile.xml
+    - demoanalyzer_cfg.py
   directories:
-      - datasets
-      - python
-      - src
+    - datasets
+    - python
+    - src
 workflow:
   type: serial
   specification:
     steps:
       - name: demoanalyzer
-        environment: 'docker.io/cmsopendata/cmssw_5_3_32'
+        environment: "docker.io/cmsopendata/cmssw_5_3_32"
         commands:
           - >
-            source /opt/cms/cmsset_default.sh
-            && scramv1 project CMSSW CMSSW_5_3_32
-            && cd CMSSW_5_3_32/src
-            && eval `scramv1 runtime -sh`
-            && mkdir reana-demo-cms-dimuon-mass-spectrum
-            && cd reana-demo-cms-dimuon-mass-spectrum
-            && mkdir DimuonSpectrum2011
-            && cd DimuonSpectrum2011
-            && cp -r ../../../../datasets ../../../../python ../../../../src ../../../../BuildFile.xml ../../../../demoanalyzer_cfg.py .
-            && scram b
-            && cmsRun ./demoanalyzer_cfg.py
+            source /opt/cms/cmsset_default.sh && scramv1 project CMSSW
+            CMSSW_5_3_32 && cd CMSSW_5_3_32/src && eval `scramv1 runtime -sh` &&
+            mkdir reana-demo-cms-dimuon-mass-spectrum && cd
+            reana-demo-cms-dimuon-mass-spectrum && mkdir DimuonSpectrum2011 &&
+            cd DimuonSpectrum2011 && cp -r ../../../../datasets
+            ../../../../python ../../../../src ../../../../BuildFile.xml
+            ../../../../demoanalyzer_cfg.py . && scram b && cmsRun
+            ./demoanalyzer_cfg.py
 outputs:
   files:
     - CMSSW_5_3_32/src/reana-demo-cms-dimuon-mass-spectrum/DimuonSpectrum2011/DoubleMu.root
